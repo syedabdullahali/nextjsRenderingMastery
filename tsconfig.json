@@ -18,8 +18,11 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",                // <--- ✅ REQUIRED for multipal alias
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/styles/*": ["./styles/*"],
+      "@/components/*": ["./components/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
