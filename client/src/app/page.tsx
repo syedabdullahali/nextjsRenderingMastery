@@ -1,3 +1,6 @@
+import CSRPage from "../../src/app/pages/CSR";
+import SSGPage from "../../src/app/pages/SSG";
+import SSRPage from "../../src/app/pages/SSR";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,10 +12,13 @@ export default function Home() {
           src="/next.svg"
           alt="Next.js logo"
           width={180}
-          height={38}
+          height={38}Z
           priority
         /> */}
         <h2 id="maina_tag"> NExt JS </h2>
+        <CSRPage/>
+        {/* <SSGPage/>
+        <SSRPage/> */}
       </main> 
     </div>
   );
