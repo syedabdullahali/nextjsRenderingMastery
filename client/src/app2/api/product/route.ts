@@ -8,14 +8,14 @@ const product =  await productModel.find()
 return NextResponse.json(product)
 }
 
-async function POST(req,res){
-    console.log("req",req.body,"res",res)
+async function POST(req:NextRequest){
+const body = await req.json(); 
 connectToDB()
-const body = NextRequest
-// console.log(body)
-const product =  new productModel()
-return NextResponse.json(product)
-}
+console.log(body)
+const product =  new productModel({...body})
+const response = await product.save()
 
+return NextResponse.json(response)
+}
 
 export {GET,POST}

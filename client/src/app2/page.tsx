@@ -5,8 +5,8 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div suppressHydrationWarning className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <div suppressHydrationWarning className=" font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-4  gap-4 ">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start ">
         {/* <Image
           className="dark:invert"
           src="/next.svg"
@@ -16,9 +16,11 @@ export default function Home() {
           priority
         /> */}
         <h2 id="maina_tag"> NExt JS </h2>
+        <div className="flex bg-gray-400">
         <CSRPage/>
-        {/* <SSGPage/>
-        <SSRPage/> */}
+        <SSGPage/>
+        <SSRPage/>
+        </div>
       </main> 
     </div>
   );

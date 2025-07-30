@@ -1,36 +1,56 @@
-CREATE DATABASE IF NOT EXISTS STORE;
-USE STORE;
+DROP DATABASE IF EXISTS WORLDINFO;
+CREATE DATABASE WORLDINFO;
 
-DROP TABLE IF EXISTS CUSTOMERS;
-DROP TABLE IF EXISTS PRODUCT;
+USE WORLDINFO;
 
-CREATE TABLE IF NOT EXISTS CUSTOMERS (
-    customerId INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    email VARCHAR(100),
-    city VARCHAR(50),
-    age INT
-);
-
+-- PRODUCT TABLE
 CREATE TABLE IF NOT EXISTS PRODUCT (
-  productId INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100),
-  qnt INT,
-  price INT,
-  discription VARCHAR(100)
+  productid INT AUTO_INCREMENT PRIMARY KEY, 
+  name VARCHAR(100)
 );
 
-INSERT INTO CUSTOMERS (name, email, city, age) VALUES
-('Ali', 'ali@example.com', 'Mumbai', 25),
-('Sara', 'sara@example.com', 'Delhi', 30),
-('John', 'john@example.com', 'Mumbai', 28),
-('Ayesha', 'ayesha@example.com', 'Hyderabad', 22);
+-- PRODUCT RATING TABLE
+CREATE TABLE PRODUCTRATING (
+  rattingProductId INT AUTO_INCREMENT PRIMARY KEY,
+  comment VARCHAR(2000),
+  ratting INT
+);
 
-INSERT INTO PRODUCT (name, qnt, price, discription) VALUES 
-('iphone', 21, 4000, 'Made By Apple'),
-('iphone', 11, 5000, 'Made By Apple'),
-('iphone', 31, 6000, 'Made By Apple'),
-('iphone', 23, 7000, 'Made By Apple');
+-- PRODUCT WITH DETAIL TABLE
+CREATE TABLE IF NOT EXISTS PRODUCTWITHDETAIL (
+  productDetailId INT AUTO_INCREMENT PRIMARY KEY,    
+  price INT,
+  productDetail VARCHAR(300),
+  name INT,
+  ratting INT,
+  FOREIGN KEY (name) REFERENCES PRODUCT(productid),
+  FOREIGN KEY (ratting) REFERENCES PRODUCTRATING(rattingProductId)
+); 
 
-SELECT * FROM CUSTOMERS;
-SELECT * FROM PRODUCT;
+-- INSERT PRODUCT
+INSERT INTO PRODUCT(name)  
+VALUES ("TFIN BOX");
+
+-- INSERT PRODUCT RATING
+INSERT INTO PRODUCTRATING(comment, ratting) 
+VALUES ("Very good product in cheap price", 5);
+
+-- INSERT PRODUCT DETAIL
+INSERT INTO PRODUCTWITHDETAIL(price, productDetail, name, ratting) 
+VALUES (200, 'Made By Syed Abdullah Ali', 1, 1);
+
+SELECT
+FULLPRODUCTWITHDETAIL.productDetailId,
+FULLPRODUCTWITHDETAIL.productDetail,
+FULLPRODUCTWITHDETAIL.price,
+PRODUCTRATe.ratting as ratting,
+PRODUCTNAME.name as name,
+COMMENT.comment as comment
+FROM 
+PRODUCTWITHDETAIL FULLPRODUCTWITHDETAIL
+JOIN 
+PRODUCT PRODUCTNAME ON FULLPRODUCTWITHDETAIL.name = PRODUCTNAME.productid
+JOIN 
+PRODUCTRATING PRODUCTRATe ON FULLPRODUCTWITHDETAIL.ratting = PRODUCTRATe.rattingProductId
+JOIN 
+PRODUCTRATING PRODUCTCOMMENT ON FULLPRODUCTWITHDETAIL.comment = PRODUCTCOMMENT.rattingProductId;
